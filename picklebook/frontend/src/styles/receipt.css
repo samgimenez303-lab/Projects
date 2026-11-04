@@ -1,0 +1,70 @@
+/* A receipt remains a paper document in both screen themes. */
+html[data-theme='dark'] #printable-receipt {
+  color-scheme: light;
+  background: #fff;
+  color: #1e293b;
+}
+
+@media print {
+  @page { size: A4; margin: 14mm; }
+
+  body:has(#printable-receipt) {
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+    color: #111827 !important;
+    color-scheme: light;
+  }
+
+  /* Hide unrelated page content without retaining its layout or blank pages. */
+  body:has(#printable-receipt) *:not(:has(#printable-receipt)):not(#printable-receipt):not(#printable-receipt *) {
+    display: none !important;
+  }
+
+  /* Release every ancestor of the document from modal/flex/scroll positioning. */
+  body:has(#printable-receipt) *:has(#printable-receipt) {
+    display: block !important;
+    position: static !important;
+    width: auto !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    transform: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  body:has(#printable-receipt) #printable-receipt {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    font-size: 11pt;
+  }
+
+  #printable-receipt, #printable-receipt * {
+    visibility: visible !important;
+    color: #111827 !important;
+    background: #fff !important;
+    border-color: #cbd5e1 !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+
+  #printable-receipt thead { display: table-header-group; }
+  #printable-receipt tr, #printable-receipt dl, #printable-receipt h3 { break-inside: avoid; }
+  #printable-receipt table { width: 100%; border-collapse: collapse; }
+  #printable-receipt td, #printable-receipt th { overflow-wrap: anywhere; }
+}

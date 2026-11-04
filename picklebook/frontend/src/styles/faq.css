@@ -1,0 +1,36 @@
+.booking-faq {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 80px;
+  padding-block: 90px;
+  scroll-margin-top: 106px;
+  color: #172e24;
+}
+.booking-faq-eyebrow { display: block; color: #52704e; font-size: 10px; line-height: 1.6; font-weight: 700; letter-spacing: .16em; margin-bottom: 16px; }
+.booking-faq h2 { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: #172e24; font-size: clamp(28px, 3.2vw, 42px); font-weight: 600; letter-spacing: -.05em; line-height: 1.24; }
+.booking-faq-intro > p { max-width: 320px; margin-top: 19px; color: #667269; font-size: 14px; line-height: 1.85; }
+.booking-faq-contact { display: inline-flex; align-items: center; gap: 12px; color: #264c33; margin-top: 25px; font-size: 13px; line-height: 1.8; font-weight: 600; }
+.booking-faq-contact:hover { color: #4e7132; text-decoration: underline; text-underline-offset: 4px; }
+.booking-faq-item { border-bottom: 1px solid #dce3d4; }
+.booking-faq-item:first-child { border-top: 1px solid #dce3d4; }
+.booking-faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; list-style: none; padding-block: 21px; cursor: pointer; color: #294331; font-size: 14px; line-height: 1.7; font-weight: 600; }
+.booking-faq-item summary::-webkit-details-marker { display: none; }
+.booking-faq-toggle { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 30px; height: 30px; border: 1px solid #dce3d4; border-radius: 50%; color: #426137; transition: background .2s, border-color .2s; }
+.booking-faq-toggle svg { transition: transform .2s; }
+.booking-faq-item summary:hover .booking-faq-toggle, .booking-faq-item[open] .booking-faq-toggle { background: #c7f36b; border-color: #c7f36b; }
+.booking-faq-item[open] .booking-faq-toggle svg { transform: rotate(180deg); }
+.booking-faq-item > p { padding: 0 42px 23px 0; font-size: 14px; line-height: 1.9; color: #667269; }
+.booking-faq :focus-visible { outline: 3px solid #4d8056; outline-offset: 5px; border-radius: 4px; }
+@media (max-width: 1000px) { .booking-faq { gap: 42px; } }
+@media (max-width: 700px) {
+  .booking-faq { grid-template-columns: 1fr; gap: 30px; padding-block: 58px; scroll-margin-top: 90px; }
+  .booking-faq h2 { font-size: 31px; }
+  .booking-faq-eyebrow { font-size: 9px; margin-bottom: 13px; }
+  .booking-faq-intro > p { max-width: 390px; font-size: 13px; margin-top: 15px; }
+  .booking-faq-contact { font-size: 12px; margin-top: 18px; }
+  .booking-faq-item summary { font-size: 13px; padding-block: 19px; gap: 14px; }
+  .booking-faq-item > p { font-size: 13px; padding-right: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .booking-faq-toggle, .booking-faq-toggle svg { transition: none; }
+}

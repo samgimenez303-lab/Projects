@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f8f9f3" />
+    <script>
+      (() => {
+        let preference;
+        try { preference = localStorage.getItem('picklebook_theme'); } catch {}
+        const dark = preference === 'dark' || (preference !== 'light' && Boolean(window.matchMedia?.('(prefers-color-scheme: dark)').matches));
+        const root = document.documentElement;
+        root.dataset.theme = dark ? 'dark' : 'light';
+        root.classList.toggle('dark', dark);
+        root.style.colorScheme = dark ? 'dark' : 'light';
+        root.style.backgroundColor = dark ? '#0b1812' : '#f8f9f3';
+        document.querySelector('meta[name="theme-color"]').content = dark ? '#0b1812' : '#f8f9f3';
+      })();
+    </script>
+    <title>PickleBook | Your court. Your game. Your time.</title>
+    <meta name="description" content="Book indoor and outdoor pickleball courts, choose your time, and track your reservation and payment with PickleBook." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-slate-50 text-slate-800 antialiased font-sans min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

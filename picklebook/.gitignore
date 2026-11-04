@@ -1,0 +1,21 @@
+node_modules/
+# Private environment files
+.env
+.env.*
+*.env
+*.env.*
+# Placeholder templates only
+!.env.example
+!.env.*.example
+!*.env.example
+dist/
+build/
+*.log
+.DS_Store
+Thumbs.db
+coverage/
+.qa/
+.idea/
+.vscode/
+*.swp
+*.swo

@@ -1,0 +1,160 @@
+/* Shared surfaces. The booking receipt keeps its own document palette. */
+:root {
+  color-scheme: light;
+  --theme-bg: #f8f9f3;
+  --theme-surface: #ffffff;
+  --theme-surface-soft: #f0f3e9;
+  --theme-hover: #eaf0e1;
+  --theme-text: #1c3528;
+  --theme-muted: #66796a;
+  --theme-border: #dce4d5;
+  --theme-accent: #7aab45;
+}
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --theme-bg: #0b1812;
+  --theme-surface: #14251c;
+  --theme-surface-soft: #1a2d22;
+  --theme-hover: #253c2c;
+  --theme-text: #e6f0e8;
+  --theme-muted: #a5b7a9;
+  --theme-border: #314737;
+  --theme-accent: #c7f36b;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--theme-border);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--theme-text);
+  transition: background .2s, border-color .2s;
+}
+.theme-toggle:hover { background: var(--theme-hover); border-color: var(--theme-accent); }
+.theme-toggle:focus-visible { outline: 3px solid var(--theme-accent); outline-offset: 4px; }
+.pb-nav-home .theme-toggle, .theme-toggle-on-dark { color: #edf5e9; border-color: #ffffff4a; }
+.pb-nav-home .theme-toggle:hover, .theme-toggle-on-dark:hover { background: #ffffff12; border-color: #c7f36b; }
+.pb-nav-desktop { gap: 24px; }
+@media (min-width: 1025px) and (max-width: 1190px) {
+  .pb-nav-inner .pb-nav-desktop { gap: 16px; }
+  .pb-nav-inner .pb-nav-links { gap: 19px; }
+  .pb-nav-inner .pb-nav-account-button > span:nth-child(2) { max-width: 80px; }
+}
+@media (max-width: 420px) {
+  .pb-nav .pb-nav-bar { gap: 8px; }
+  .pb-nav .pb-nav-brand > span { font-size: 20px; }
+  .pb-nav .pb-nav-brand > img { width: 30px; height: 30px; }
+  .pb-nav .pb-nav-mobile-actions { gap: 8px; }
+  .pb-nav .theme-toggle { width: 34px; height: 34px; }
+  .pb-nav .pb-nav-mobile-signin { font-size: 10px; }
+  .dashboard-mobile-header .theme-toggle { width: 32px; height: 32px; }
+  .dashboard-mobile-header a > img { width: 24px; height: 24px; }
+  .dashboard-mobile-header a > span { font-size: 16px; }
+}
+
+/* Existing utility classes share the same dark surfaces across public and staff screens.
+   :where keeps the receipt exclusion from increasing selector specificity. */
+@media screen {
+  html[data-theme='dark'] body { background: var(--theme-bg); color: var(--theme-text); }
+  html[data-theme='dark'] :is(.public-layout, .club-home) { background: var(--theme-bg); color: var(--theme-text); }
+  html[data-theme='dark'] .dashboard-shell { background-color: var(--theme-bg); background-image: radial-gradient(#8dad7710 1px, transparent 1px); }
+  html[data-theme='dark'] .dashboard-topbar { background: #14251ced; border-color: var(--theme-border); }
+  html[data-theme='dark'] .dashboard-topbar > div > span { color: var(--theme-muted); }
+  html[data-theme='dark'] .dashboard-topbar > div > p { color: var(--theme-text); }
+  html[data-theme='dark'] .dashboard-sidebar { background: #0d2017; }
+  html[data-theme='dark'] :is(h1, h2, h3, h4, h5, h6):not(:where(.club-hero *, .court-hero *, .page-banner *, .site-footer *, .home-payment *, #printable-receipt, #printable-receipt *)) { color: var(--theme-text); }
+
+  html[data-theme='dark'] :is(.bg-white, .bg-white\/80, .bg-white\/90, .bg-white\/95, .card, .card-hover):not(:where(#printable-receipt, #printable-receipt *)) { background-color: var(--theme-surface); }
+  html[data-theme='dark'] :is(.bg-slate-50, .bg-slate-100):not(:where(#printable-receipt, #printable-receipt *)) { background-color: var(--theme-surface-soft); }
+  html[data-theme='dark'] .bg-slate-200:not(:where(#printable-receipt, #printable-receipt *)) { background-color: var(--theme-hover); }
+  html[data-theme='dark'] :is(.bg-pickle-50, .bg-pickle-100, .bg-pickle-50\/30, .bg-pickle-50\/60, .bg-navy-50, .bg-navy-100):not(:where(#printable-receipt, #printable-receipt *)) { background-color: #203827; }
+  html[data-theme='dark'] :is(.text-slate-700, .text-slate-800, .text-slate-900, .form-label):not(:where(#printable-receipt, #printable-receipt *)) { color: var(--theme-text); }
+  html[data-theme='dark'] :is(.text-slate-400, .text-slate-500, .text-slate-600):not(:where(#printable-receipt, #printable-receipt *)) { color: var(--theme-muted); }
+  html[data-theme='dark'] .text-slate-300:not(:where(#printable-receipt, #printable-receipt *)) { color: #c6d6c9; }
+  html[data-theme='dark'] :is(.text-navy-500, .text-navy-600, .text-navy-700, .text-navy-800, .text-navy-900):not(:where(#printable-receipt, #printable-receipt *)) { color: #d0e5d5; }
+  html[data-theme='dark'] :is(.text-pickle-500, .text-pickle-600, .text-pickle-700, .text-pickle-800):not(:where(#printable-receipt, #printable-receipt *)) { color: #b9df8a; }
+  html[data-theme='dark'] :is(.border, .border-t, .border-b, .border-l, .border-r, .card, .card-hover, .border-slate-100, .border-slate-200, .border-slate-200\/75, .border-slate-200\/80, .border-slate-300, .border-navy-100, .border-navy-200, .border-pickle-100):not(:where(#printable-receipt, #printable-receipt *)) { border-color: var(--theme-border); }
+  html[data-theme='dark'] .divide-slate-100 > :not([hidden]) ~ :not([hidden]):not(:where(#printable-receipt, #printable-receipt *)) { border-color: var(--theme-border); }
+  html[data-theme='dark'] :is(.border-pickle-500, .border-pickle-600, .border-navy-500, .border-navy-600):not(:where(#printable-receipt, #printable-receipt *)) { border-color: #84b55a; }
+
+  html[data-theme='dark'] :is(.hover\:bg-slate-50, .hover\:bg-slate-50\/70, .hover\:bg-slate-100, .hover\:bg-slate-200):hover:not(:where(#printable-receipt, #printable-receipt *)) { background-color: var(--theme-hover); }
+  html[data-theme='dark'] :is(.hover\:text-slate-600, .hover\:text-slate-800, .hover\:text-navy-500):hover:not(:where(#printable-receipt, #printable-receipt *)) { color: #f0f7ed; }
+  html[data-theme='dark'] :is(.hover\:text-pickle-600, .hover\:text-pickle-700, .hover\:text-pickle-800):hover:not(:where(#printable-receipt, #printable-receipt *)) { color: #d4f69e; }
+  html[data-theme='dark'] :is(.hover\:border-slate-300, .hover\:border-pickle-500):hover:not(:where(#printable-receipt, #printable-receipt *)) { border-color: #84b55a; }
+  html[data-theme='dark'] :is(.form-input, .form-select):not(:where(#printable-receipt, #printable-receipt *)) { color: var(--theme-text); background-color: #102017; border-color: #49604d; }
+  html[data-theme='dark'] :is(.form-input, .form-select)::placeholder { color: #91a596; opacity: 1; }
+  html[data-theme='dark'] :is(.form-input, .form-select):focus { border-color: #b0d878; --tw-ring-color: #83b358; }
+  html[data-theme='dark'] :is(input, select, textarea):not(:where(#printable-receipt, #printable-receipt *)) { accent-color: #b6df80; }
+  html[data-theme='dark'] :is(.btn-outline, .btn-secondary):not(:where(#printable-receipt, #printable-receipt *)) { background-color: #233c2d; border-color: #4b6550; color: #e8f2e8; }
+  html[data-theme='dark'] :is(.btn-outline, .btn-secondary):hover:not(:where(#printable-receipt, #printable-receipt *)) { background-color: #304d37; border-color: #7e9b69; }
+  html[data-theme='dark'] :is(.btn-primary, .btn-secondary, .btn-outline, .btn-danger):not(:where(#printable-receipt, #printable-receipt *)) { --tw-ring-offset-color: var(--theme-bg); }
+  html[data-theme='dark'] :focus-visible { outline-color: #c7f36b; }
+
+  html[data-theme='dark'] :is(.bg-amber-50, .bg-amber-100, .badge-pending):not(:where(#printable-receipt, #printable-receipt *)) { background-color: #352d19; }
+  html[data-theme='dark'] :is(.text-amber-600, .text-amber-700, .text-amber-800, .text-amber-900, .badge-pending):not(:where(#printable-receipt, #printable-receipt *)) { color: #f0ce81; }
+  html[data-theme='dark'] :is(.border-amber-100, .border-amber-200, .badge-pending):not(:where(#printable-receipt, #printable-receipt *)) { border-color: #66562c; }
+  html[data-theme='dark'] :is(.bg-emerald-50, .bg-emerald-100, .badge-confirmed):not(:where(#printable-receipt, #printable-receipt *)) { background-color: #173b2b; }
+  html[data-theme='dark'] :is(.text-emerald-500, .text-emerald-600, .text-emerald-700, .text-emerald-800, .text-emerald-900, .badge-confirmed):not(:where(#printable-receipt, #printable-receipt *)) { color: #9bdfb9; }
+  html[data-theme='dark'] :is(.border-emerald-200, .badge-confirmed):not(:where(#printable-receipt, #printable-receipt *)) { border-color: #37664c; }
+  html[data-theme='dark'] :is(.bg-rose-50, .bg-rose-100, .badge-cancelled):not(:where(#printable-receipt, #printable-receipt *)) { background-color: #39242a; }
+  html[data-theme='dark'] :is(.text-rose-500, .text-rose-600, .text-rose-700, .text-rose-800, .text-rose-900, .form-error, .badge-cancelled):not(:where(#printable-receipt, #printable-receipt *)) { color: #f3a9b1; }
+  html[data-theme='dark'] :is(.border-rose-100, .border-rose-200, .badge-cancelled):not(:where(#printable-receipt, #printable-receipt *)) { border-color: #71454e; }
+  html[data-theme='dark'] :is(.hover\:bg-rose-50):hover:not(:where(#printable-receipt, #printable-receipt *)) { background-color: #512b34; }
+  html[data-theme='dark'] .hover\:text-rose-700:hover:not(:where(#printable-receipt, #printable-receipt *)) { color: #ffd0d4; }
+  html[data-theme='dark'] :is(.bg-blue-50, .bg-blue-100, .badge-completed):not(:where(#printable-receipt, #printable-receipt *)) { background-color: #173044; }
+  html[data-theme='dark'] :is(.text-blue-600, .text-blue-800, .text-blue-900, .badge-completed):not(:where(#printable-receipt, #printable-receipt *)) { color: #a8d5fa; }
+  html[data-theme='dark'] :is(.border-blue-200, .badge-completed):not(:where(#printable-receipt, #printable-receipt *)) { border-color: #355975; }
+  html[data-theme='dark'] .text-purple-600:not(:where(#printable-receipt, #printable-receipt *)) { color: #c7b1f0; }
+  html[data-theme='dark'] .badge-rejected { background: var(--theme-surface-soft); border-color: var(--theme-border); color: var(--theme-muted); }
+  html[data-theme='dark'] .border-l-emerald-500 { border-left-color: #87cba6; }
+  html[data-theme='dark'] .border-l-rose-500 { border-left-color: #f3a9b1; }
+  html[data-theme='dark'] .border-l-amber-500 { border-left-color: #f0ce81; }
+  html[data-theme='dark'] .border-l-navy-500 { border-left-color: #b1cdb9; }
+
+  html[data-theme='dark'] :is(.eyebrow, .text-link) { color: #b5d88e; }
+  html[data-theme='dark'] .text-link:hover { color: #daf3b4; }
+  html[data-theme='dark'] .page-banner { background-color: #112c20; }
+  html[data-theme='dark'] .page-banner .eyebrow { color: #c5dfab; }
+  html[data-theme='dark'] .home-process { background: #13271b; border-color: var(--theme-border); }
+  html[data-theme='dark'] :is(.service-feature, .payment-preview) { background: var(--theme-surface); border-color: var(--theme-border); }
+  html[data-theme='dark'] :is(.service-feature h3, .payment-option strong, .faq-list summary, .process-step h3) { color: var(--theme-text); }
+  html[data-theme='dark'] :is(.faq-list details > p, .payment-option p, .process-step p) { color: var(--theme-muted); }
+  html[data-theme='dark'] :is(.service-arrow, .faq-list details, .process-step) { border-color: var(--theme-border); }
+  html[data-theme='dark'] .payment-option-symbol { background: #24422a; color: #c8e5ad; }
+  html[data-theme='dark'] .site-footer { background: #081b12; }
+  html[data-theme='dark'] .site-footer h2 { color: #edf5e8; }
+  html[data-theme='dark'] .site-footer h2 ~ a { color: #bdcfbd; }
+  html[data-theme='dark'] .site-footer a:hover { color: #c7f36b; }
+
+  html[data-theme='dark'] .pb-nav-inner { background: #102219f5; color: var(--theme-text); border-color: var(--theme-border); }
+  html[data-theme='dark'] .pb-nav-inner .pb-nav-brand-dot { color: #c7f36b; }
+  html[data-theme='dark'] .pb-nav-inner .pb-nav-link-active::after { background: #c7f36b; }
+  html[data-theme='dark'] .pb-nav-inner :is(.pb-nav-signin, .pb-nav-account-button, .pb-nav-menu-toggle) { border-color: #7f9a6f70; }
+  html[data-theme='dark'] .pb-nav-inner .pb-nav-signin:hover { background: var(--theme-hover); border-color: #c7f36b; }
+  html[data-theme='dark'] :is(.pb-nav-dropdown, .pb-nav-mobile-panel) { background: #152a1f; color: #e1eedf; border-color: #3b523e; }
+  html[data-theme='dark'] :is(.pb-nav-user, .pb-nav-mobile-account) { border-color: var(--theme-border); }
+  html[data-theme='dark'] :is(.pb-nav-user > span, .pb-nav-register) { color: var(--theme-muted); }
+  html[data-theme='dark'] .pb-nav-user > small { background: #2c442c; color: #d0e8b3; }
+  html[data-theme='dark'] :is(.pb-nav-dropdown > a, .pb-nav-mobile-account > a, .pb-nav-mobile-link):hover { background: #263f2c; }
+  html[data-theme='dark'] .pb-nav-mobile-link.active { background: #2a452e; }
+  html[data-theme='dark'] .pb-nav-register > a { color: #d0e8b3; }
+  html[data-theme='dark'] .pb-nav .pb-nav-signout { color: #f2b0b5; }
+  html[data-theme='dark'] .pb-nav .pb-nav-signout:hover { background: #43282e; }
+  html[data-theme='dark'] .skip-link { background: #d8edbd; color: #16291c; }
+  html[data-theme='dark'] .recharts-cartesian-axis-tick-value { fill: var(--theme-muted); }
+  html[data-theme='dark'] .recharts-cartesian-grid line { stroke: var(--theme-border); }
+  html[data-theme='dark'] .recharts-default-tooltip { background-color: var(--theme-surface) !important; border-color: var(--theme-border) !important; color: var(--theme-text); }
+  html[data-theme='dark'] :is(.recharts-tooltip-item, .recharts-legend-item-text) { color: var(--theme-text) !important; }
+}
+
+@media print {
+  :root, html[data-theme='dark'] { color-scheme: light; background: #fff !important; }
+  body { background: #fff !important; color: #17211c !important; }
+  .theme-toggle { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) { .theme-toggle { transition: none; } }
